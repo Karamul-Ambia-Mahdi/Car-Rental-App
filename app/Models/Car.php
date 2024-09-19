@@ -19,6 +19,10 @@ class Car extends Model
         'image'
     ];
 
+    protected $attributes = [
+        'availability' => 1
+    ];
+
     public function rental(): HasMany
     {
         return $this->hasMany(Rental::class);
