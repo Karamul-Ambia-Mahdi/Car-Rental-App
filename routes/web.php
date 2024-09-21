@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\RentalController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\DashboardController;
 
 
 // User Authentication API
@@ -40,4 +41,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/rental-by-id', [RentalController::class, 'rentalById']);
     Route::post('/rental-update/{startDate}/{endDate}', [RentalController::class, 'rentalUpdate']);
     Route::post('/rental-delete', [RentalController::class, 'rentalDelete']);
+
+
+
+    // Dashboard API
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 });
