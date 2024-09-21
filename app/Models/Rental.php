@@ -13,7 +13,8 @@ class Rental extends Model
         'car_id',
         'start_date',
         'end_date',
-        'total_cost'
+        'total_cost',
+        'status'
     ];
 
     public function car(): BelongsTo

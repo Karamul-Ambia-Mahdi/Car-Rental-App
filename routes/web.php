@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\CarController;
+use App\Http\Controllers\Admin\RentalController;
 use App\Http\Controllers\Admin\CustomerController;
 
 
@@ -30,4 +31,13 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/customer-by-id', [CustomerController::class, 'customerById']);
     Route::post('/customer-update', [CustomerController::class, 'customerUpdate']);
     Route::post('/customer-delete', [CustomerController::class, 'customerDelete']);
+
+
+
+    // Rental API
+    Route::get('/rental-list', [RentalController::class, 'rentalList']);
+    Route::post('/rental-create/{startDate}/{endDate}', [RentalController::class, 'rentalCreate']);
+    Route::get('/rental-by-id', [RentalController::class, 'rentalById']);
+    Route::post('/rental-update/{startDate}/{endDate}', [RentalController::class, 'rentalUpdate']);
+    Route::post('/rental-delete', [RentalController::class, 'rentalDelete']);
 });
