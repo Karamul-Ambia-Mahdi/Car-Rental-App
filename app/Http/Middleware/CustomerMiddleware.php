@@ -22,12 +22,16 @@ class CustomerMiddleware
         $result = JWTToken::VerifyToken($token);
 
         if ($result !== 'unauthorized') {
-            
+
             $user = User::where('email', $result->userEmail)->first();
-            
-            if($user->isCustomer()){
+
+            if ($user->isCustomer()) {
+
+                $request->headers->set('email', $result->userEmail);
+                $request->headers->set('id', $result->userId);
+
                 return $next($request);
-            }
+            } 
             else {
                 abort(403, 'You do not have permission to access this page');
             }
