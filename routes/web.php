@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Admin\CarController as AdminCarController;
 use App\Http\Controllers\Admin\RentalController as AdminRentalController;
+use App\Http\Controllers\Frontend\CarController as FrontendCarController;
 use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Frontend\CarController as FrontendCarController;
 use App\Http\Controllers\Frontend\RentalController as FrontendRentalController;
 
 
@@ -64,3 +65,14 @@ Route::middleware(['customer'])->group(function () {
     Route::post('/update-rental/{startDate}/{endDate}', [FrontendRentalController::class, 'rentalUpdate']);
     Route::post('/cancel-rental', [FrontendRentalController::class, 'rentalCancel']);
 });
+
+
+
+// Home Page
+Route::get('/', [PageController::class, 'homePage']);
+// About Page
+Route::get('/about', [PageController::class, 'aboutPage']);
+// Cars Page
+Route::get('/cars', [PageController::class, 'carsPage']);
+// Contact Page
+Route::get('/contact', [PageController::class, 'contactPage']);
