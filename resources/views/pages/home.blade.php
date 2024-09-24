@@ -8,8 +8,8 @@
                     <p class="lead text-muted mb-4">Discover our latest cars, pre-booking without any payment,
                         and actionable insights in one intuitive app.</p>
                     <div class="d-flex flex-wrap"><a class="btn bg-gradient-secondary me-2 mb-2 mb-sm-0"
-                            href="{{ url('/userLogin') }}">Rent A Car</a>
-                        <a class="btn bg-gradient-secondary mb-2 mb-sm-0" href="{{ url('/userLogin') }}">Login</a>
+                            href="{{ url('/cars') }}">Rent A Car</a>
+                        <a class="btn bg-gradient-secondary mb-2 mb-sm-0" href="{{ url('/login') }}">Login</a>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 offset-lg-1">

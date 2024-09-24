@@ -40,7 +40,7 @@
                     <li class="nav-item me-4"><a class="nav-link" href="{{ url('/cars') }}">Cars</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
                 </ul>
-                <div><a class="btn mt-3 bg-gradient-secondary" href="{{ url('/userLogin') }}">Login</a></div>
+                <div><a class="btn mt-3 bg-gradient-secondary" href="{{ url('/login') }}">Login</a></div>
             </div>
         </div>
     </nav>

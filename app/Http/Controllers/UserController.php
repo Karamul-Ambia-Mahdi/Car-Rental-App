@@ -9,17 +9,22 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function register(Request $request)
+    public function signUp(Request $request)
     {
         try {
-            return User::create(
+            User::create(
                 $request->all()
             );
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Sign Up Successful'
+            ], 200);
         } 
         catch (Exception $e) {
             return response()->json([
-                'error' => $e->getMessage()
-            ], 500);
+                'message' => 'Something went wrong !'
+            ], 200);
         }
     }
 
@@ -36,22 +41,30 @@ class UserController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' =>  'Login Successful'
+                'message' =>  'Login Successful',
+                'role' =>  $user->role
             ], 200)->cookie('token',  $token, 60 * 24 * 30);
         } 
         else {
             return response()->json([
                 'status'  => 'failed',
                 'message' => 'Invalid email or password'
-            ],  401);
+            ],  200);
         }
     }
 
     public function logout()
     {
-        return response()->json([
-            'status'  => 'success',
-            'message' => 'Logged out successfully'
-        ],  200)->cookie('token', '', -1);
+        return redirect('/login')->cookie('token', '', -1);
+    }
+
+    public function loginPage()
+    {
+        return view('pages.auth.login-page');
+    }
+
+    public function signUpPage()
+    {
+        return view('pages.auth.sign-up-page');
     }
 }

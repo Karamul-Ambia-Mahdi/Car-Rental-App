@@ -23,4 +23,9 @@ class DashboardController extends Controller
             'total_earnings' => $total_earnings
         ];
     }
+
+    public function dashboardPage()
+    {
+        return view('pages.admin.dashboard');
+    }
 }

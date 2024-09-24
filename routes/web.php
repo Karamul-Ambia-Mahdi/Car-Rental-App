@@ -12,9 +12,13 @@ use App\Http\Controllers\Frontend\RentalController as FrontendRentalController;
 
 
 // User Authentication API
-Route::post('/register', [UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);
+Route::post('/user-sign-up', [UserController::class, 'signUp']);
+Route::post('/user-login', [UserController::class, 'login']);
 Route::get('/logout', [UserController::class, 'logout']);
+
+// User Authentication Page
+Route::get('/sign-up', [UserController::class, 'signUpPage']);
+Route::get('/login', [UserController::class, 'loginPage']);
 
 
 
@@ -48,7 +52,10 @@ Route::middleware(['admin'])->group(function () {
 
 
     // Dashboard API
-    Route::get('/dashboard', [AdminDashboardController::class, 'index']);
+    Route::get('/user-dashboard', [AdminDashboardController::class, 'index']);
+
+    // Dashboard Page
+    Route::get('/dashboard', [AdminDashboardController::class, 'dashboardPage']);
 });
 
 
