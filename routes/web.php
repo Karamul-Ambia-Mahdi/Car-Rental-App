@@ -31,17 +31,21 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/car-update', [AdminCarController::class, 'carUpdate']);
     Route::post('/car-delete', [AdminCarController::class, 'carDelete']);
 
-// Car Page
-Route::get('/cars-page', [AdminCarController::class, 'carsPage']);
+    // Car Page
+    Route::get('/cars-page', [AdminCarController::class, 'carsPage']);
 
 
 
     // Customer API
     Route::get('/customer-list', [AdminCustomerController::class, 'customerList']);
     Route::post('/customer-create', [AdminCustomerController::class, 'customerCreate']);
-    Route::get('/customer-by-id', [AdminCustomerController::class, 'customerById']);
+    Route::post('/customer-by-id', [AdminCustomerController::class, 'customerById']);
     Route::post('/customer-update', [AdminCustomerController::class, 'customerUpdate']);
     Route::post('/customer-delete', [AdminCustomerController::class, 'customerDelete']);
+    Route::post('/customer-rental-history', [AdminCustomerController::class, 'customerRentalHistory']);
+
+    // Customer Page
+    Route::get('/customers-page', [AdminCustomerController::class, 'customersPage']);
 
 
 
