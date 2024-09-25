@@ -11,7 +11,13 @@ class CarController extends Controller
 {
     public function carList()
     {
-        return Car::all();
+        $cars = Car::all();
+
+        foreach ($cars as $car) {
+            $car->availability ? $car->availability = 'Available' : $car->availability = 'Not Available';
+        }
+
+        return $cars;
     }
 
     public function carCreate(Request $request)
@@ -72,7 +78,6 @@ class CarController extends Controller
                     'year' => $request->input('year'),
                     'car_type' =>  $request->input('car_type'),
                     'daily_rent_price' =>  $request->input('daily_rent_price'),
-                    'availability' =>  $request->input('availability'),
                     'image' => $img_url
                 ]);
         } 
@@ -84,8 +89,7 @@ class CarController extends Controller
                     'model' => $request->input('model'),
                     'year' => $request->input('year'),
                     'car_type' =>  $request->input('car_type'),
-                    'daily_rent_price' =>  $request->input('daily_rent_price'),
-                    'availability' =>  $request->input('availability')
+                    'daily_rent_price' =>  $request->input('daily_rent_price')
                 ]);
         }
     }
@@ -99,5 +103,10 @@ class CarController extends Controller
         File::delete($filePath);
 
         return Car::where('id', '=', $request->input('id'))->delete();
+    }
+
+    public function carsPage()
+    {
+        return view('pages.admin.cars-page');
     }
 }

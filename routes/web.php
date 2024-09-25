@@ -27,9 +27,12 @@ Route::middleware(['admin'])->group(function () {
     // Car API
     Route::get('/car-list', [AdminCarController::class, 'carList']);
     Route::post('/car-create', [AdminCarController::class, 'carCreate']);
-    Route::get('/car-by-id', [AdminCarController::class, 'carById']);
+    Route::post('/car-by-id', [AdminCarController::class, 'carById']);
     Route::post('/car-update', [AdminCarController::class, 'carUpdate']);
     Route::post('/car-delete', [AdminCarController::class, 'carDelete']);
+
+// Car Page
+Route::get('/cars-page', [AdminCarController::class, 'carsPage']);
 
 
 
