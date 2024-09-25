@@ -52,7 +52,7 @@ Route::middleware(['admin'])->group(function () {
 
 
     // Dashboard API
-    Route::get('/user-dashboard', [AdminDashboardController::class, 'index']);
+    Route::get('/summary', [AdminDashboardController::class, 'index']);
 
     // Dashboard Page
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboardPage']);

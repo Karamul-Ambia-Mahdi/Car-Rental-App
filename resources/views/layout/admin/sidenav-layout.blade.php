@@ -59,9 +59,6 @@
                             <h6>Admin</h6>
                             <hr class="user-dropdown-divider  p-0" />
                         </div>
-                        <a href="{{ url('/userProfile') }}" class="side-bar-item">
-                            <span class="side-bar-item-caption">Profile</span>
-                        </a>
                         <a href="{{ url('/logout') }}" class="side-bar-item">
                             <span class="side-bar-item-caption">Logout</span>
                         </a>
@@ -79,36 +76,20 @@
             <span class="side-bar-item-caption">Dashboard</span>
         </a>
 
-        <a href="{{ url('/customerPage') }}" class="side-bar-item">
+        <a href="{{ url('/cars-page') }}" class="side-bar-item">
+            <i class="bi bi-car-front"></i>
+            <span class="side-bar-item-caption">Car</span>
+        </a>
+        
+        <a href="{{ url('/customers-page') }}" class="side-bar-item">
             <i class="bi bi-people"></i>
             <span class="side-bar-item-caption">Customer</span>
         </a>
 
-        <a href="{{ url('/categoryPage') }}" class="side-bar-item">
-            <i class="bi bi-list-nested"></i>
-            <span class="side-bar-item-caption">Category</span>
-        </a>
-
-        <a href="{{ url('/productPage') }}" class="side-bar-item">
-            <i class="bi bi-bag"></i>
-            <span class="side-bar-item-caption">Product</span>
-        </a>
-
-        <a href="{{ url('/salePage') }}" class="side-bar-item">
-            <i class="bi bi-currency-dollar"></i>
-            <span class="side-bar-item-caption">Create Sale</span>
-        </a>
-
-        <a href="{{ url('/invoicePage') }}" class="side-bar-item">
+        <a href="{{ url('/rentals-page') }}" class="side-bar-item">
             <i class="bi bi-receipt"></i>
-            <span class="side-bar-item-caption">Invoice</span>
+            <span class="side-bar-item-caption">Rental</span>
         </a>
-
-        <a href="{{ url('/reportPage') }}" class="side-bar-item">
-            <i class="bi bi-file-earmark-bar-graph"></i>
-            <span class="side-bar-item-caption">Report</span>
-        </a>
-
 
     </div>
 
