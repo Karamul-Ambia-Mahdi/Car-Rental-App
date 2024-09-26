@@ -52,9 +52,13 @@ Route::middleware(['admin'])->group(function () {
     // Rental API
     Route::get('/rental-list', [AdminRentalController::class, 'rentalList']);
     Route::post('/rental-create/{startDate}/{endDate}', [AdminRentalController::class, 'rentalCreate']);
-    Route::get('/rental-by-id', [AdminRentalController::class, 'rentalById']);
+    Route::post('/rental-by-id', [AdminRentalController::class, 'rentalById']);
     Route::post('/rental-update/{startDate}/{endDate}', [AdminRentalController::class, 'rentalUpdate']);
     Route::post('/rental-delete', [AdminRentalController::class, 'rentalDelete']);
+    Route::post('/rental-status-update', [AdminRentalController::class, 'rentalStatusUpdate']);
+
+    // Rental Page
+    Route::get('/rentals-page', [AdminRentalController::class, 'rentalPage']);
 
 
 

@@ -37,12 +37,14 @@ class RentalController extends Controller
                 return response()->json([
                     'status' => 'failed',
                     'message' => 'Invalid dates'
-                ]);
+                ], 200);
             }
 
 
 
             // Check booking slots availability
+            $booking_slot = 0;
+
             $bookings = Rental::where('car_id', '=', $car_id)
                 ->where('status', '!=', 'Canceled')
                 ->select('start_date', 'end_date')
@@ -51,17 +53,24 @@ class RentalController extends Controller
             foreach ($bookings as $booking) {
 
                 if (($start_date >= $booking->start_date) && ($start_date <= $booking->end_date)) {
-                    return 0;
+                    $booking_slot = 1;
                 } 
                 else if (($end_date >= $booking->start_date) && ($end_date <= $booking->end_date)) {
-                    return 0;
+                    $booking_slot = 1;
                 } 
                 else if (($booking->start_date >= $start_date) && ($booking->start_date <= $end_date)) {
-                    return 0;
+                    $booking_slot = 1;
                 } 
                 else if (($booking->end_date >= $start_date) && ($booking->end_date <= $end_date)) {
-                    return 0;
+                    $booking_slot = 1;
                 }
+            }
+
+            if($booking_slot === 1){
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Sorry, The car is already booked for this slot'
+                ], 200);
             }
 
 
@@ -94,6 +103,7 @@ class RentalController extends Controller
 
 
 
+            // Rental creation
             Rental::create([
                 'user_id' => $user_id,
                 'car_id' => $car_id,
@@ -105,12 +115,18 @@ class RentalController extends Controller
 
             DB::commit();
 
-            return 1;
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Rental created successfully'
+            ], 200);
         } 
         catch (Exception $e) {
 
             DB::rollBack();
-            return 0;
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Request failed'
+            ], 200);
         }
     }
 
@@ -134,32 +150,52 @@ class RentalController extends Controller
 
 
 
+            // Check dates validity
+            $t = time();
+            $date = date('Y-m-d', $t);
+
+            if ($date > $start_date || $start_date > $end_date) {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Invalid dates'
+                ], 200);
+            }
+
+
+
             // Check booking slots availability
+            $booking_slot = 0;
+
             $bookings = Rental::where('car_id', '=', $car_id)
                 ->where('status', '!=', 'Canceled')
                 ->where('id',  '!=', $rental_id)
                 ->select('start_date', 'end_date')
                 ->get();
 
-
-
             foreach ($bookings as $booking) {
 
                 if (($start_date >= $booking->start_date) && ($start_date <= $booking->end_date)) {
-                    return 0;
+                    $booking_slot = 1;
                 } 
                 else if (($end_date >= $booking->start_date) && ($end_date <= $booking->end_date)) {
-                    return 0;
+                    $booking_slot = 1;
                 } 
                 else if (($booking->start_date >= $start_date) && ($booking->start_date <= $end_date)) {
-                    return 0;
+                    $booking_slot = 1;
                 } 
                 else if (($booking->end_date >= $start_date) && ($booking->end_date <= $end_date)) {
-                    return 0;
+                    $booking_slot = 1;
                 }
             }
 
-           
+            if($booking_slot === 1){
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Sorry, The car is already booked for this slot'
+                ], 200);
+            }
+
+
 
             // Total Rent Calculation
             $carRent = Car::where('id', '=', $car_id)->select('daily_rent_price')->first();
@@ -180,8 +216,7 @@ class RentalController extends Controller
                 Car::where('id', '=', $car_id)->update([
                     'availability' => 0
                 ]);
-            }
-            else{
+            } else {
                 Car::where('id', '=', $car_id)->update([
                     'availability' => 1
                 ]);
@@ -200,6 +235,60 @@ class RentalController extends Controller
 
             DB::commit();
 
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Rental created successfully'
+            ], 200);
+        } 
+        catch (Exception $e) {
+
+            DB::rollBack();
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Request failed'
+            ], 200);
+        }
+    }
+
+    public function rentalDelete(Request $request)
+    {
+        return Rental::where('id', '=', $request->input('id'))->delete();
+    }
+
+    public function rentalStatusUpdate(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            $rental_id = $request->input('id');
+            $car_id = $request->input('car_id');
+            $status = $request->input('status');
+
+
+
+            // Car status update
+            if ($status === 'Ongoing') {
+
+                Car::where('id', '=', $car_id)->update([
+                    'availability' => 0
+                ]);
+            } 
+            else {
+                Car::where('id', '=', $car_id)->update([
+                    'availability' => 1
+                ]);
+            }
+
+
+
+            // Rental status update
+            Rental::where('id', '=', $rental_id)->update([
+                'status' => $status
+            ]);
+
+            DB::commit();
+
             return 1;
         } 
         catch (Exception $e) {
@@ -209,8 +298,8 @@ class RentalController extends Controller
         }
     }
 
-    public function rentalDelete(Request $request)
+    public function rentalPage()
     {
-        return Rental::where('id', '=', $request->input('id'))->delete();
+        return view('pages.admin.rentals-page');
     }
 }
