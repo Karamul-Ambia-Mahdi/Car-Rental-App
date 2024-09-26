@@ -4,8 +4,8 @@
             <div class="modal-body text-center">
                 <h3 class=" mt-3 text-warning">Delete !</h3>
                 <p class="mb-3">Once deleted, you can't get it back.</p>
-                <input class="" id="deleteId" />
-                <input class="" id="deleteFilePath" />
+                <input class="d-none" id="deleteId" />
+                <input class="d-none" id="deleteFilePath" />
             </div>
             <div class="modal-footer justify-content-end">
                 <div>
@@ -37,7 +37,10 @@
         if (res.data === 1) {
             successToast("Request completed");
             await getList();
-        } 
+        }
+        else if(res.status === 200 && res.data['status'] === 'failed'){
+            errorToast(res.data['message']);
+        }
         else {
             errorToast("Request fail !");
         }

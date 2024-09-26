@@ -36,8 +36,8 @@
                                 <input oninput="oldImg.src=window.URL.createObjectURL(this.files[0])" type="file"
                                     class="form-control" id="carImgUpdate">
 
-                                <input type="text" class="" id="updateId">
-                                <input type="text" class="" id="filePath">
+                                <input type="text" class="d-none" id="updateId">
+                                <input type="text" class="d-none" id="filePath">
 
                             </div>
                         </div>

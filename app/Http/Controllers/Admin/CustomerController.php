@@ -34,8 +34,21 @@ class CustomerController extends Controller
 
     public function customerDelete(Request $request)
     {
-        return User::where('id', '=', $request->input('id'))
-            ->where('role', '=', 'customer')->delete();
+        $user = User::where('id', '=', $request->input('id'))
+            ->where('role', '=', 'customer')
+            ->with('rental')->first();
+
+        $rentalCount = $user->rental->count();
+
+        if ($rentalCount > 0) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => "Sorry, The user has {$rentalCount} rental history. Have to delete them first."
+            ], 200);
+        } 
+        else {
+            return User::where('id', '=', $user->id)->delete();
+        }
     }
 
     public function customerRentalHistory(Request $request)

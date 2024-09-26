@@ -14,7 +14,7 @@ class DashboardController extends Controller
         $total_cars = Car::count();
         $total_available_cars = Car::where('availability', '=', 1)->count();
         $total_rentals = Rental::where('status', '!=', 'Canceled')->count();
-        $total_earnings = Rental::where('status', '!=', 'Canceled')->sum('total_cost');
+        $total_earnings = Rental::where('status', '=', 'Completed')->sum('total_cost');
 
         return [
             'total_cars' => $total_cars,

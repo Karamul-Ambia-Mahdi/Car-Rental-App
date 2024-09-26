@@ -34,6 +34,9 @@
         if (res.data === 1) {
             successToast("Request completed");
             await getList();
+        }
+        else if(res.status === 200 && res.data['status'] === 'failed'){
+            errorToast(res.data['message']);
         } 
         else {
             errorToast("Request fail !");

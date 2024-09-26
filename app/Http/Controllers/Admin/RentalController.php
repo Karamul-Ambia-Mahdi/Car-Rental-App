@@ -216,7 +216,8 @@ class RentalController extends Controller
                 Car::where('id', '=', $car_id)->update([
                     'availability' => 0
                 ]);
-            } else {
+            } 
+            else {
                 Car::where('id', '=', $car_id)->update([
                     'availability' => 1
                 ]);

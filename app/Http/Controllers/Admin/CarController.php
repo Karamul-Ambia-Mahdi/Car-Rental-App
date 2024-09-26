@@ -97,12 +97,26 @@ class CarController extends Controller
     public function carDelete(Request $request)
     {
 
-        // Delete file
-        $filePath = $request->input('file_path');
+        $car = Car::where('id', '=', $request->input('id'))
+            ->with('rental')->first();
 
-        File::delete($filePath);
+        $rentalCount = $car->rental->count();
 
-        return Car::where('id', '=', $request->input('id'))->delete();
+        if ($rentalCount > 0) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => "Sorry, The car has {$rentalCount} rental history. Have to delete them first."
+            ], 200);
+        } 
+        else {
+
+            // Delete file
+            $filePath = $request->input('file_path');
+
+            File::delete($filePath);
+
+            return Car::where('id', '=', $car->id)->delete();
+        }
     }
 
     public function carsPage()
