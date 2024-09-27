@@ -32,7 +32,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/car-delete', [AdminCarController::class, 'carDelete']);
 
     // Car Page
-    Route::get('/cars-page', [AdminCarController::class, 'carsPage']);
+    Route::get('/all-cars-page', [AdminCarController::class, 'carsPage']);
 
 
 

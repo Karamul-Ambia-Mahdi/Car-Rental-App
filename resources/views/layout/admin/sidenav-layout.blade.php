@@ -76,7 +76,7 @@
             <span class="side-bar-item-caption">Dashboard</span>
         </a>
 
-        <a href="{{ url('/cars-page') }}" class="side-bar-item">
+        <a href="{{ url('/all-cars-page') }}" class="side-bar-item">
             <i class="bi bi-car-front"></i>
             <span class="side-bar-item-caption">Car</span>
         </a>
