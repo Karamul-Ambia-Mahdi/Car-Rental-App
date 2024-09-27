@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use Exception;
 use App\Models\Car;
+use App\Models\User;
 use App\Models\Rental;
+use App\Mail\AdminMail;
+use App\Mail\CustomerMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class RentalController extends Controller
 {
@@ -112,6 +116,15 @@ class RentalController extends Controller
                 'total_cost' => $total_cost,
                 'status' => $status
             ]);
+
+            $user = User::where('id', '=', $user_id)->first();
+
+            // Send Mail to Admin
+            Mail::to("mdmahdi45@gmail.com")->send(new AdminMail($carRent->name, $start_date, $end_date, $user->name, $user->email, $user->phone, $user->address));
+            // Send Mail to Customer
+            Mail::to($user->email)->send(new CustomerMail($carRent->name, $start_date, $end_date, $total_cost, $user->name, $user->address));
+
+
 
             DB::commit();
 

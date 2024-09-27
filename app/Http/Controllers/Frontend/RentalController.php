@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Frontend;
 
 use Exception;
 use App\Models\Car;
+use App\Models\User;
 use App\Models\Rental;
+use App\Mail\AdminMail;
+use App\Mail\CustomerMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class RentalController extends Controller
 {
@@ -78,7 +82,7 @@ class RentalController extends Controller
 
 
             // Total Rent Calculation
-            $carRent = Car::where('id', '=', $car_id)->select('daily_rent_price')->first();
+            $carRent = Car::where('id', '=', $car_id)->first();
 
             $days = 1;
 
@@ -98,6 +102,15 @@ class RentalController extends Controller
                 'end_date' => $end_date,
                 'total_cost' => $total_cost
             ]);
+
+            $user = User::where('id', '=', $user_id)->first();
+
+            // Send Mail to Admin
+            Mail::to("mdmahdi45@gmail.com")->send(new AdminMail($carRent->name, $start_date, $end_date, $user->name, $user->email, $user->phone, $user->address));
+            // Send Mail to Customer
+            Mail::to($user->email)->send(new CustomerMail($carRent->name, $start_date, $end_date, $total_cost, $user->name, $user->address));
+
+
 
             return response()->json([
                 'status' => 'success',
