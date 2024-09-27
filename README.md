@@ -1,3 +1,9 @@
+## Project Showcase Video
+
+Please follow the link below to watch the project showcase video. The video is fast forwarded. So it won't take too much of your time, only 4:05 min.
+
+Project-Showcase-Video-Link : https://drive.google.com/file/d/1YOg6xVcmTHnqGKaa64J-u7zSOIEIGw6h/view?usp=sharing
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
