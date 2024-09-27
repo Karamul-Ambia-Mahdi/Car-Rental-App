@@ -72,16 +72,28 @@ Route::middleware(['admin'])->group(function () {
 
 
 // Car List
-Route::get('/cars', [FrontendCarController::class, 'index']);
+Route::post('/all-cars', [FrontendCarController::class, 'index']);
 
 Route::middleware(['customer'])->group(function () {
 
     //Rental API
-    Route::get('/rentals', [FrontendRentalController::class, 'rentalList']);
+    Route::get('/user-rentals', [FrontendRentalController::class, 'rentalList']);
     Route::post('/create-rental/{startDate}/{endDate}', [FrontendRentalController::class, 'rentalCreate']);
     Route::get('/rental-via-id', [FrontendRentalController::class, 'rentalById']);
     Route::post('/update-rental/{startDate}/{endDate}', [FrontendRentalController::class, 'rentalUpdate']);
     Route::post('/cancel-rental', [FrontendRentalController::class, 'rentalCancel']);
+
+    //Rental Page
+    Route::get('/rental-history', [PageController::class, 'rentalsPage']);
+
+    // Home Page
+    Route::get('/home', [PageController::class, 'homePage2']);
+    // About Page
+    Route::get('/about-page', [PageController::class, 'aboutPage2']);
+    // Cars Page
+    Route::get('/cars-page', [PageController::class, 'carsPage2']);
+    // Contact Page
+    Route::get('/contact-page', [PageController::class, 'contactPage2']);
 });
 
 

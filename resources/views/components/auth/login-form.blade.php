@@ -51,7 +51,7 @@
                     window.location.href = "/dashboard";
                 }
                 else{
-                    window.location.href = "/rentals";
+                    window.location.href = "/rental-history";
                 }
             } 
             else {

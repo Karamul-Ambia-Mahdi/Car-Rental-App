@@ -37,8 +37,9 @@ class CustomerMiddleware
             }
         }
 
-        return  response()->json([
-            'message' => 'Unauthorized'
-        ], 401);
+        return response()->json([
+            'status' => 'Unauthorized',
+            'message' => 'Unauthorized ! Please Login.'
+        ], 200);
     }
 }

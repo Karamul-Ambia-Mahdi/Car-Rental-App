@@ -8,36 +8,56 @@ use App\Http\Controllers\Controller;
 
 class CarController extends Controller
 {
+    // public function index(){
+    //     $available_cars  =  Car::where('availability', '=', 1)->get();
+    //     $ongoing_cars  =  Car::where('availability', '=', 0)->get();
+
+    //     return [
+    //         'available_cars' => $available_cars,
+    //         'ongoing_cars' => $ongoing_cars
+    //     ];
+    // }
+
     public function index(Request $request)
     {
-        // Available cars
-        $cars = Car::where('availability', '=', 1)->get();
+        $search = "%" . $request->input('search') . "%";
+        $type = $request->input('type');
+        $brand = $request->input('brand');
+        $price = $request->input('price');
 
-        // Search cars
-        if ($request->input('search')) {
+        $available_cars = Car::where('availability', '=', 1)
+            ->when($search,  function ($query) use ($search) {
+                $query->where('name', 'LIKE', $search);
+            })
+            ->when($type,  function ($query) use ($type) {
+                $query->where('car_type', '=', $type);
+            })
+            ->when($brand,  function ($query) use ($brand) {
+                $query->where('brand', '=', $brand);
+            })
+            ->when($price,  function ($query) use ($price) {
+                $query->where('daily_rent_price', '<=', $price);
+            })
+            ->get();
 
-            $search = "%" . $request->input('search') . "%";
+        $ongoing_cars = Car::where('availability', '=', 0)
+            ->when($search,  function ($query) use ($search) {
+                $query->where('name', 'LIKE', $search);
+            })
+            ->when($type,  function ($query) use ($type) {
+                $query->where('car_type', '=', $type);
+            })
+            ->when($brand,  function ($query) use ($brand) {
+                $query->where('brand', '=', $brand);
+            })
+            ->when($price,  function ($query) use ($price) {
+                $query->where('daily_rent_price', '<=', $price);
+            })
+            ->get();
 
-            $cars = Car::where('availability', '=', 1)
-                ->where('name', 'LIKE', $search)
-                ->get();
-        }
-
-        // Filter by type
-        if ($request->input('type')) {
-            $cars = $cars->where('car_type',  '=', $request->input('type'));
-        }
-
-        // Filter by brand
-        if ($request->input('brand')) {
-            $cars = $cars->where('brand',  '=', $request->input('brand'));
-        }
-
-        // Filter by price
-        if ($request->input('price')) {
-            $cars = $cars->where('daily_rent_price', '<=', $request->input('price'));
-        }
-
-        return $cars;
+        return [
+            'available_cars' => $available_cars,
+            'ongoing_cars' => $ongoing_cars
+        ];
     }
 }

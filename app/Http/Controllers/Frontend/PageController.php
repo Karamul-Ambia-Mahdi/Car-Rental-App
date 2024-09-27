@@ -26,4 +26,29 @@ class PageController extends Controller
     {
         return view('pages.contact');
     }
+
+    public function homePage2()
+    {
+        return view('pages.frontend.home');
+    }
+
+    public function aboutPage2()
+    {
+        return view('pages.frontend.about');
+    }
+
+    public function carsPage2()
+    {
+        return view('pages.frontend.cars');
+    }
+
+    public function contactPage2()
+    {
+        return view('pages.frontend.contact');
+    }
+
+    public function rentalsPage()
+    {
+        return view('pages.frontend.rentals-page');
+    }
 }

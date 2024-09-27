@@ -35,7 +35,7 @@
 
     <nav class="navbar sticky-top shadow-sm navbar-expand-lg navbar-light py-2">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ url('/home') }}">
                 <img class="img-fluid" src="{{ asset('/images/logo.png') }}" alt="" width="200px">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header01"
@@ -44,12 +44,13 @@
             </button>
             <div class="collapse navbar-collapse" id="header01">
                 <ul class="navbar-nav ms-auto mt-3 mt-lg-0 mb-3 mb-lg-0 me-4">
-                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
-                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/about') }}">About</a></li>
-                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/cars') }}">Cars</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/home') }}">Home</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/about-page') }}">About</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/cars-page') }}">Cars</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/rental-history') }}">Rentals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/contact-page') }}">Contact</a></li>
                 </ul>
-                <div><a class="btn mt-3 bg-gradient-secondary" href="{{ url('/login') }}">Login</a></div>
+                <div><a class="btn mt-3 bg-gradient-secondary" href="{{ url('/logout') }}">Logout</a></div>
             </div>
         </div>
     </nav>
@@ -60,15 +61,16 @@
 
     <footer class="py-5 bg-light">
         <div class="container text-center pb-5 border-bottom">
-            <a class="d-inline-block mx-auto mb-4" href="/">
+            <a class="d-inline-block mx-auto mb-4" href="/home">
                 <img class="img-fluid"src="{{ asset('/images/logo-2.webp') }}" alt="" width="100px"><br>
                 <b><i>Quick Car Rental</i></b>
             </a>
             <ul class="d-flex flex-wrap justify-content-center align-items-center list-unstyled mb-4">
                 <li><a class="link-secondary me-4" href="#">Back to Top</a></li>
-                <li><a class="link-secondary me-4" href="{{ url('/about') }}">About</a></li>
-                <li><a class="link-secondary me-4" href="{{ url('/cars') }}">Cars</a></li>
-                <li><a class="link-secondary me-4" href="{{ url('/contact') }}">Contact</a></li>
+                <li><a class="link-secondary me-4" href="{{ url('/about-page') }}">About</a></li>
+                <li><a class="link-secondary me-4" href="{{ url('/cars-page') }}">Cars</a></li>
+                <li><a class="link-secondary me-4" href="{{ url('/rental-history') }}">Rentals</a></li>
+                <li><a class="link-secondary me-4" href="{{ url('/contact-page') }}">Contact</a></li>
             </ul>
             <div>
                 <a class="d-inline-block me-4" href="#">
