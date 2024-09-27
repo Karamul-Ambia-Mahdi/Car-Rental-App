@@ -13,7 +13,7 @@
             <li><strong style="font-size: 1.1em; color: #c58486">Car Name:</strong> {{ $carName }}</li>
             <li><strong style="font-size: 1.1em; color: #c58486">Rental Period:</strong> {{ $rentalStartDate }} to {{ $rentalEndDate }}</li>
             <li><strong style="font-size: 1.1em; color: #c58486;">Pickup Location:</strong> {{ $customerAddress }}</li>
-            <li><strong style="font-size: 1.1em; color: #c58486;">Total Cost:</strong> {{ $totalCost }}</li>
+            <li><strong style="font-size: 1.1em; color: #c58486;">Total Cost: $</strong> {{ $totalCost }}</li>
         </ul> 
         <p>
             Please find the rental agreement attached to this email for your

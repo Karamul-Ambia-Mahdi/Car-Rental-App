@@ -80,7 +80,7 @@ class RentalController extends Controller
 
 
             // Total Rent Calculation
-            $carRent = Car::where('id', '=', $car_id)->select('daily_rent_price')->first();
+            $carRent = Car::where('id', '=', $car_id)->first();
 
             $days = 1;
 

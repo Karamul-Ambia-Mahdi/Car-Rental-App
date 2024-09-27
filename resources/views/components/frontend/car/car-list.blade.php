@@ -39,10 +39,13 @@
                     <option value="">Brand</option>
                     <option value="Audi">Audi</option>
                     <option value="BMW">BMW</option>
+                    <option value="Cadillac">Cadillac</option>
+                    <option value="Dodge">Dodge</option>
                     <option value="Fiat">Fiat</option>
                     <option value="Ford">Ford</option>
                     <option value="Land Rover">Land Rover</option>
                     <option value="Mercedes-Benz">Mercedes-Benz</option>
+                    <option value="Nissan">Nissan</option>
                     <option value="Porsche">Porsche</option>
                     <option value="Tesla">Tesla</option>
                 </select>
